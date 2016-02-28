@@ -118,7 +118,7 @@ static NSString * const kAFOAuth1CredentialServiceName = @"AFOAuth1CredentialSer
     _secret = [decoder decodeObjectForKey:NSStringFromSelector(@selector(secret))];
     _session = [decoder decodeObjectForKey:NSStringFromSelector(@selector(session))];
     _verifier = [decoder decodeObjectForKey:NSStringFromSelector(@selector(verifier))];
-    _renewable = [decoder decodeBoolForKey:NSStringFromSelector(@selector(renewable))];
+    _renewable = [decoder decodeBoolForKey:NSStringFromSelector(@selector(canBeRenewed))];
     _expiration = [decoder decodeObjectForKey:NSStringFromSelector(@selector(expiration))];
     _userInfo = [decoder decodeObjectForKey:NSStringFromSelector(@selector(userInfo))];
     
@@ -130,7 +130,7 @@ static NSString * const kAFOAuth1CredentialServiceName = @"AFOAuth1CredentialSer
     [coder encodeObject:self.secret forKey:NSStringFromSelector(@selector(secret))];
     [coder encodeObject:self.session forKey:NSStringFromSelector(@selector(session))];
     [coder encodeObject:self.expiration forKey:NSStringFromSelector(@selector(expiration))];
-    [coder encodeBool:self.renewable forKey:NSStringFromSelector(@selector(renewable))];
+    [coder encodeBool:self.renewable forKey:NSStringFromSelector(@selector(canBeRenewed))];
     [coder encodeObject:self.verifier forKey:NSStringFromSelector(@selector(verifier))];
     [coder encodeObject:self.userInfo forKey:NSStringFromSelector(@selector(userInfo))];
 }

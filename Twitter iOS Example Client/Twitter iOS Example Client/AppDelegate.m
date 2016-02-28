@@ -39,7 +39,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     
     [self.twitterClient authorizeUsingOAuthWithRequestTokenURLString:@"/oauth/request_token" userAuthorizationURLString:@"/oauth/authorize" callbackURL:[NSURL URLWithString:@"af-twitter://success"] accessTokenURLString:@"/oauth/access_token" accessMethod:@"POST" scope:nil success:^(AFOAuth1Token *accessToken, id responseObject) {
         self.twitterClient.responseSerializer = [AFJSONResponseSerializer serializer];
-        [self.twitterClient GET:@"statuses/user_timeline.json" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.twitterClient GET:@"statuses/user_timeline.json" parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             NSLog(@"%@", responseObject);
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             NSLog(@"Error: %@", error);
