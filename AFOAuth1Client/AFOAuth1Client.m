@@ -25,7 +25,7 @@
 #import "AFOAuth1RequestSerializer.h"
 #import "AFOAuth1Token.h"
 #import "AFOAuth1Utils.h"
-#import "AFURLResponseSerialization.h"
+#import <AFNetworking/AFURLResponseSerialization.h>
 
 NSString * const kAFApplicationLaunchedWithURLNotification = @"kAFApplicationLaunchedWithURLNotification";
 #if __IPHONE_OS_VERSION_MIN_REQUIRED

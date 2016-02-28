@@ -23,7 +23,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AFOAuth1Client.h"
+#import <AFOAuth1Client/AFOAuth1Client.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

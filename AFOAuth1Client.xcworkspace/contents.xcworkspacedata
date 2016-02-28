@@ -5,6 +5,9 @@
       location = "group:AFOAuth1Client.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:AFNetworking/AFNetworking.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Twitter iOS Example Client/Twitter iOS Example Client.xcodeproj">
    </FileRef>
    <FileRef
