@@ -22,6 +22,8 @@
 
 #import <AFNetworking/AFURLRequestSerialization.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class AFOAuth1Token;
 
 /**
@@ -52,17 +54,17 @@ typedef NS_ENUM(NSUInteger, AFOAuth1SignatureMethod) {
 /**
  The authentication realm.
  */
-@property (nonatomic, copy) NSString *realm;
+@property (nonatomic, copy, nullable) NSString *realm;
 
 /**
  The client's access token.
  */
-@property (nonatomic, strong) AFOAuth1Token *accessToken;
+@property (nonatomic, strong, nullable) AFOAuth1Token *accessToken;
 
 /**
  OAuth parameters.
  */
-@property (nonatomic, copy, readonly) NSDictionary *oauthParameters;
+@property (nonatomic, copy, readonly, nullable) NSDictionary *oauthParameters;
 
 /**
  Creates and initializes an `AFOAuth1RequestSerializer` object with the specified key, and secret.
@@ -81,3 +83,5 @@ typedef NS_ENUM(NSUInteger, AFOAuth1SignatureMethod) {
 - (instancetype)initWithKey:(NSString *)key secret:(NSString *)secret NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -29,6 +29,8 @@
 #import <Appkit/AppKit.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///---------------------------
 /// @name Forward Declarations
 ///---------------------------
@@ -88,7 +90,7 @@ FOUNDATION_EXPORT NSString * const kAFApplicationLaunchOptionsURLKey;
  @param key The client key.
  @param secret The client secret.
  */
-- (instancetype)initWithBaseURL:(NSURL *)url
+- (instancetype)initWithBaseURL:(nullable NSURL *)url
                             key:(NSString *)key
                          secret:(NSString *)secret;
 
@@ -112,12 +114,12 @@ FOUNDATION_EXPORT NSString * const kAFApplicationLaunchOptionsURLKey;
  */
 - (void)authorizeUsingOAuthWithRequestTokenURLString:(NSString *)requestTokenURLString
                           userAuthorizationURLString:(NSString *)userAuthorizationURLString
-                                         callbackURL:(NSURL *)callbackURL
+                                         callbackURL:(nullable NSURL *)callbackURL
                                 accessTokenURLString:(NSString *)accessTokenURLString
                                         accessMethod:(NSString *)accessMethod
-                                               scope:(NSString *)scope
-                                             success:(void (^)(AFOAuth1Token *accessToken, id responseObject))success
-                                             failure:(void (^)(NSError *error))failure;
+                                               scope:(nullable NSString *)scope
+                                             success:(nullable void (^)(AFOAuth1Token *accessToken, id responseObject))success
+                                             failure:(nullable void (^)(NSError *error))failure;
 
 /**
  Performs a `NSURLSessionDataTask` to acquire an OAuth request token with the specified URL string, callback URL, access method, and scope.
@@ -130,11 +132,11 @@ FOUNDATION_EXPORT NSString * const kAFApplicationLaunchOptionsURLKey;
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the error returned from the server.
  */
 - (NSURLSessionDataTask *)acquireOAuthRequestTokenWithURLString:(NSString *)URLString
-                                                    callbackURL:(NSURL *)callbackURL
+                                                    callbackURL:(nullable NSURL *)callbackURL
                                                    accessMethod:(NSString *)accessMethod
-                                                          scope:(NSString *)scope
-                                                        success:(void (^)(AFOAuth1Token *requestToken, id responseObject))success
-                                                        failure:(void (^)(NSError *error))failure;
+                                                          scope:(nullable NSString *)scope
+                                                        success:(nullable void (^)(AFOAuth1Token *requestToken, id responseObject))success
+                                                        failure:(nullable void (^)(NSError *error))failure;
 
 /**
  Performs a `NSURLSessionDataTask` to acquire an OAuth access token with the specified URL string, request token and access method.
@@ -148,8 +150,8 @@ FOUNDATION_EXPORT NSString * const kAFApplicationLaunchOptionsURLKey;
 - (NSURLSessionDataTask *)acquireOAuthAccessTokenWithURLString:(NSString *)URLString
                                                   requestToken:(AFOAuth1Token *)requestToken
                                                   accessMethod:(NSString *)accessMethod
-                                                       success:(void (^)(AFOAuth1Token *accessToken, id responseObject))success
-                                                       failure:(void (^)(NSError *error))failure;
+                                                       success:(nullable void (^)(AFOAuth1Token *accessToken, id responseObject))success
+                                                       failure:(nullable void (^)(NSError *error))failure;
 
 ///----------------------------------------------------
 /// @name Configuring Service Provider Request Handling
@@ -161,7 +163,9 @@ FOUNDATION_EXPORT NSString * const kAFApplicationLaunchOptionsURLKey;
  @param block A block to be executed when the request is made to the service provider. This block has no return value and takes a single argument: the request made to the service provider.
  @param completion A block to be executed when the request is finished. This block has no return value and takes no arguments.
  */
-- (void)setServiceProviderRequestHandler:(AFServiceProviderRequestHandlerBlock)block
-                              completion:(AFServiceProviderRequestCompletionBlock)completion;
+- (void)setServiceProviderRequestHandler:(nullable AFServiceProviderRequestHandlerBlock)block
+                              completion:(nullable AFServiceProviderRequestCompletionBlock)completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

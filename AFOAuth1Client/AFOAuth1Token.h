@@ -22,6 +22,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  `AFOAuth1Token` models the credentials returned from an OAuth server, storing the key, secret, session, verifier, and whether the token is expired and can be renewed.
  
@@ -42,34 +44,34 @@
 /**
  The OAuth token session.
  */
-@property (readonly, nonatomic, copy) NSString *session;
+@property (readonly, nonatomic, copy, nullable) NSString *session;
 
 /**
  The OAuth token verifier.
  */
-@property (nonatomic, copy) NSString *verifier;
+@property (nonatomic, copy, nullable) NSString *verifier;
 
 /**
  Whether the OAuth token can be renewed.
  */
-@property (readonly, nonatomic, assign, getter = canBeRenewed) BOOL renewable;
+@property (readonly, nonatomic, getter = canBeRenewed) BOOL renewable;
 
 /**
  Whether the OAuth token is expired.
  */
-@property (readonly, nonatomic, assign, getter = isExpired) BOOL expired;
+@property (readonly, nonatomic, getter = isExpired) BOOL expired;
 
 /**
  Any additional information associated with the OAuth token.
  */
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, strong, nullable) NSDictionary *userInfo;
 
 /**
  Initialize an OAuth token from a URL query string.
  
  @param queryString The query of a URL containing the OAuth token credentials.
  */
-- (instancetype)initWithQueryString:(NSString *)queryString;
+- (instancetype)initWithQueryString:(nullable NSString *)queryString;
 
 /**
  Initializes an OAuth token with the specified key, secret, session, and expiration date.
@@ -82,8 +84,8 @@
  */
 - (instancetype)initWithKey:(NSString *)key
                      secret:(NSString *)secret
-                    session:(NSString *)session
-                 expiration:(NSDate *)expiration
+                    session:(nullable NSString *)session
+                 expiration:(nullable NSDate *)expiration
                   renewable:(BOOL)canBeRenewed;
 
 ///---------------------
@@ -99,7 +101,7 @@
  
  @return Whether or not the credential was stored in the keychain.
  */
-+ (BOOL)storeCredential:(AFOAuth1Token *)credential
++ (BOOL)storeCredential:(nullable AFOAuth1Token *)credential
          withIdentifier:(NSString *)identifier;
 
 /**
@@ -111,9 +113,9 @@
  
  @return Whether or not the credential was stored in the keychain.
  */
-+ (BOOL)storeCredential:(AFOAuth1Token *)credential
++ (BOOL)storeCredential:(nullable AFOAuth1Token *)credential
          withIdentifier:(NSString *)identifier
-      withAccessibility:(id)securityAccessibility;
+      withAccessibility:(nullable id)securityAccessibility;
 
 /**
  Retrieves the OAuth credential stored with the specified service identifier from the Keychain.
@@ -134,3 +136,5 @@
 + (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

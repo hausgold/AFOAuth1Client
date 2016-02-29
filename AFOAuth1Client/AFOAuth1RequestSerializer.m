@@ -56,7 +56,7 @@ NSString * NSStringFromAFOAuth1SignatureMethod(AFOAuth1SignatureMethod signature
 }
 
 - (instancetype)init {
-    return [self initWithKey:nil secret:nil];
+    return [self initWithKey:@"" secret:@""];
 }
 
 - (instancetype)initWithKey:(NSString *)key secret:(NSString *)secret {
