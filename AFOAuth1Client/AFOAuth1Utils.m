@@ -30,12 +30,6 @@ NSString * AFOAuth1Nounce() {
     return (NSString *)CFBridgingRelease(string);
 }
 
-NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding) {
-    NSString *secret = tokenSecret ? tokenSecret : @"";
-    NSString *signature = [NSString stringWithFormat:@"%@&%@", consumerSecret, secret];
-    return signature;
-}
-
 /**
  Returns a percent-escaped string for a header string key or value.
  RFC 3986 states that the following characters are "reserved" characters.
@@ -89,6 +83,12 @@ NSString * AFOAuth1QueryStringFromParameters(NSDictionary *parameters) {
     }
     
     return [mutablePairs componentsJoinedByString:@"&"];
+}
+
+NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding) {
+    NSString *secret = tokenSecret ? tokenSecret : @"";
+    NSString *signature = [NSString stringWithFormat:@"%@&%@", consumerSecret, secret];
+    return signature;
 }
 
 NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding) {

@@ -22,9 +22,12 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Returns a OAuth1 nounce using the UUID.
+ 
+ @return A OAuth nounce.
+ */
 FOUNDATION_EXPORT NSString * AFOAuth1Nounce();
-
-FOUNDATION_EXPORT NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding);
 
 /**
  Returns a percent-escaped string for a header string key or value.
@@ -32,21 +35,86 @@ FOUNDATION_EXPORT NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, N
  - General Delimiters: ":", "#", "[", "]", "@", "?", "/"
  - Sub-Delimiters: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
  
- - parameter string: The string to be percent-escaped.
- - returns: The percent-escaped string.
+ @param string The string to be percent-escaped.
+ 
+ @return The percent-escaped string.
  */
 FOUNDATION_EXPORT NSString * AFOAuth1PercentEscapedStringFromString(NSString *string);
 
+/**
+ Returns a query string for the given parameters.
+ 
+ @param parameters The parameters to serialize.
+ 
+ @return The query string.
+ */
 FOUNDATION_EXPORT NSString * AFOAuth1QueryStringFromParameters(NSDictionary *parameters);
 
-FOUNDATION_EXPORT NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding);
-
+/**
+ Returns parameters of the given query.
+ 
+ @param queryString The query string to deserialize.
+ 
+ @return The parameters.
+ */
 FOUNDATION_EXPORT NSDictionary * AFOAuth1ParametersFromQueryString(NSString *queryString);
 
+/**
+ Returns a PLAINTEXT signature.
+ 
+ @param request        The request to sign.
+ @param consumerSecret The consumer secret.
+ @param tokenSecret    The token secret.
+ @param stringEncoding The string encoding.
+ 
+ @return The request signature.
+ */
+FOUNDATION_EXPORT NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding);
+
+/**
+ Returns an HMAC-SHA1 signature.
+ 
+ @param request        The request to sign.
+ @param consumerSecret The consumer secret.
+ @param tokenSecret    The token secret.
+ @param stringEncoding The string encoding.
+ 
+ @return The request signature.
+ */
+FOUNDATION_EXPORT NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding);
+
+/**
+ Returns sorted query string.
+ 
+ @param queryString The query string to sort.
+ 
+ @return The sorted query string.
+ */
 FOUNDATION_EXPORT NSString * AFOAuth1SortedQueryString(NSString *queryString);
 
+/**
+ Returns sorted query items from query string.
+ 
+ @param queryString The query string.
+ 
+ @return The sorted query items.
+ */
 FOUNDATION_EXPORT NSArray *AFOAuth1SortedQueryItemsFromQueryString(NSString *queryString);
 
+/**
+ Returns sorted query items from parameters.
+ 
+ @param parameters The parameters
+ 
+ @return The sorted query items.
+ */
 FOUNDATION_EXPORT NSArray * AFOAuth1SortedQueryItemsFromParameters(NSDictionary *parameters);
 
+/**
+ Returns YES if the value starts with a 't' or 'T'.
+ 
+ @param value The query string value to check.
+ 
+ @return Yes if the value is true.
+ */
 FOUNDATION_EXPORT BOOL AFOAuth1IsQueryStringValueTrue(NSString *value);

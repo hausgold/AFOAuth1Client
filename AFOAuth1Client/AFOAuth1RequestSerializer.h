@@ -24,8 +24,17 @@
 
 @class AFOAuth1Token;
 
+/**
+ Signature method enumeration/
+ */
 typedef NS_ENUM(NSUInteger, AFOAuth1SignatureMethod) {
+    /**
+     PLAINTEXT signature method.
+     */
     AFOAuth1PlainTextSignatureMethod = 1,
+    /**
+     HMAC-SHA1 signature method.
+     */
     AFOAuth1HMACSHA1SignatureMethod = 2,
 };
 
@@ -51,9 +60,17 @@ typedef NS_ENUM(NSUInteger, AFOAuth1SignatureMethod) {
 @property (nonatomic, strong) AFOAuth1Token *accessToken;
 
 /**
- 
+ OAuth parameters.
  */
 @property (nonatomic, copy, readonly) NSDictionary *oauthParameters;
+
+/**
+ Creates and initializes an `AFOAuth1RequestSerializer` object with the specified key, and secret.
+ 
+ @param key The client key.
+ @param secret The client secret.
+ */
++ (instancetype)serializerWithKey:(NSString *)key secret:(NSString *)secret;
 
 /**
  Instantiates an `AFOAuth1RequestSerializer` object with the specified key, and secret.
@@ -61,8 +78,6 @@ typedef NS_ENUM(NSUInteger, AFOAuth1SignatureMethod) {
  @param key The client key.
  @param secret The client secret.
  */
-+ (instancetype)serializerWithKey:(NSString *)key secret:(NSString *)secret;
-
 - (instancetype)initWithKey:(NSString *)key secret:(NSString *)secret NS_DESIGNATED_INITIALIZER;
 
 @end
