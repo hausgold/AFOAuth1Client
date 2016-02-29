@@ -86,13 +86,13 @@ NSString * NSStringFromAFOAuth1SignatureMethod(AFOAuth1SignatureMethod signature
 }
 
 - (NSString *)oauthSignatureForMethod:(NSString *)method URLString:(NSString *)URLString parameters:(NSDictionary *)parameters token:(AFOAuth1Token *)token error:(NSError * __autoreleasing *)error {
-
-    self.queryStringSerializationWithBlock = ^NSString * _Nonnull(NSURLRequest * _Nonnull request, id  _Nonnull parameters, NSError * _Nullable __autoreleasing * _Nullable error) {
+    
+    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
+    serializer.queryStringSerializationWithBlock = ^NSString * _Nonnull(NSURLRequest * _Nonnull request, id  _Nonnull parameters, NSError * _Nullable __autoreleasing * _Nullable error) {
         return AFOAuth1QueryStringFromParameters(parameters);
     };
     
-    NSMutableURLRequest *request = [super requestWithMethod:@"GET" URLString:URLString parameters:parameters error:error];
-    self.queryStringSerializationWithBlock = nil;
+    NSMutableURLRequest *request = [serializer requestWithMethod:@"GET" URLString:URLString parameters:parameters error:error];
     
     if (!request) {
         return nil;
