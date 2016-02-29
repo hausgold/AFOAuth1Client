@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0CDE4D01C84D985009CE178 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CDE4CF1C84D985009CE178 /* AFNetworking.framework */; };
+		D0CDE4D21C84D993009CE178 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CDE4D11C84D993009CE178 /* AFNetworking.framework */; };
 		D0D754691C834E4400744D93 /* AFOAuth1Client.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE87A1C8329490077D540 /* AFOAuth1Client.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D7546A1C834E4900744D93 /* AFOAuth1Token.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8851C832A3B0077D540 /* AFOAuth1Token.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D7546B1C834F0100744D93 /* AFOAuth1Client-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8DE1C8337E50077D540 /* AFOAuth1Client-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D7546C1C834F2E00744D93 /* AFOAuth1RequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8831C832A3B0077D540 /* AFOAuth1RequestSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D7546D1C834F3000744D93 /* AFOAuth1Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8871C832A3B0077D540 /* AFOAuth1Utils.h */; };
+		D0D7546D1C834F3000744D93 /* AFOAuth1Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8871C832A3B0077D540 /* AFOAuth1Utils.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D0D7546E1C834FE300744D93 /* AFOAuth1Client.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8821C832A3B0077D540 /* AFOAuth1Client.m */; };
 		D0D7546F1C834FE600744D93 /* AFOAuth1RequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8841C832A3B0077D540 /* AFOAuth1RequestSerializer.m */; };
 		D0D754701C834FE900744D93 /* AFOAuth1Token.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8861C832A3B0077D540 /* AFOAuth1Token.m */; };
@@ -22,12 +24,14 @@
 		D0FAE88B1C832A3B0077D540 /* AFOAuth1RequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8841C832A3B0077D540 /* AFOAuth1RequestSerializer.m */; };
 		D0FAE88C1C832A3B0077D540 /* AFOAuth1Token.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8851C832A3B0077D540 /* AFOAuth1Token.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0FAE88D1C832A3B0077D540 /* AFOAuth1Token.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8861C832A3B0077D540 /* AFOAuth1Token.m */; };
-		D0FAE88E1C832A3B0077D540 /* AFOAuth1Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8871C832A3B0077D540 /* AFOAuth1Utils.h */; };
+		D0FAE88E1C832A3B0077D540 /* AFOAuth1Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8871C832A3B0077D540 /* AFOAuth1Utils.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D0FAE88F1C832A3B0077D540 /* AFOAuth1Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8881C832A3B0077D540 /* AFOAuth1Utils.m */; };
 		D0FAE8DF1C8337E50077D540 /* AFOAuth1Client-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8DE1C8337E50077D540 /* AFOAuth1Client-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D0CDE4CF1C84D985009CE178 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "AFNetworking/build/Debug-iphoneos/AFNetworking.framework"; sourceTree = "<group>"; };
+		D0CDE4D11C84D993009CE178 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = AFNetworking/build/Debug/AFNetworking.framework; sourceTree = "<group>"; };
 		D0FAE8771C8329490077D540 /* AFOAuth1Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFOAuth1Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0FAE87A1C8329490077D540 /* AFOAuth1Client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFOAuth1Client.h; sourceTree = "<group>"; };
 		D0FAE87C1C8329490077D540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Framework/Info.plist; sourceTree = "<group>"; };
@@ -39,7 +43,6 @@
 		D0FAE8871C832A3B0077D540 /* AFOAuth1Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFOAuth1Utils.h; sourceTree = "<group>"; };
 		D0FAE8881C832A3B0077D540 /* AFOAuth1Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFOAuth1Utils.m; sourceTree = "<group>"; };
 		D0FAE8DE1C8337E50077D540 /* AFOAuth1Client-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AFOAuth1Client-umbrella.h"; path = "Framework/AFOAuth1Client-umbrella.h"; sourceTree = SOURCE_ROOT; };
-		D0FAE8EC1C8347650077D540 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "AFNetworking/build/Debug-iphoneos/AFNetworking.framework"; sourceTree = "<group>"; };
 		D0FAE8F81C834A310077D540 /* AFOAuth1Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFOAuth1Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -48,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CDE4D01C84D985009CE178 /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CDE4D21C84D993009CE178 /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +112,8 @@
 		D0FAE8F21C8349950077D540 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0FAE8EC1C8347650077D540 /* AFNetworking.framework */,
+				D0CDE4D11C84D993009CE178 /* AFNetworking.framework */,
+				D0CDE4CF1C84D985009CE178 /* AFNetworking.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -415,6 +422,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
