@@ -100,7 +100,7 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
         self.applicationLaunchNotificationObserver = [defaultNotificationCenter addObserverForName:kAFApplicationLaunchedWithURLNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
             NSURL *URL = [notification.userInfo valueForKey:kAFApplicationLaunchOptionsURLKey];
             
-            currentRequestToken.verifier = [[AFOAuth1Utils parametersFromQueryString:URL.query] valueForKey:@"oauth_verifier"];
+            currentRequestToken.verifier = [AFOAuth1ParametersFromQueryString(URL.query) valueForKey:@"oauth_verifier"];
             
             NSURLSessionDataTask * __unused acquireOAuthAccessTokenTask = [self acquireOAuthAccessTokenWithURLString:accessTokenURLString requestToken:currentRequestToken accessMethod:accessMethod success:^(AFOAuth1Token * accessToken, id responseObject) {
                 if (self.serviceProviderRequestCompletion) {

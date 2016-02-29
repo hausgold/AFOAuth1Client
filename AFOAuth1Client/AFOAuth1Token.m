@@ -43,7 +43,7 @@ static NSString * const kAFOAuth1CredentialServiceName = @"AFOAuth1CredentialSer
         return nil;
     }
     
-    NSDictionary *parameters = [AFOAuth1Utils parametersFromQueryString:queryString];
+    NSDictionary *parameters = AFOAuth1ParametersFromQueryString(queryString);
     
     if (parameters.count == 0) {
         return nil;
@@ -62,7 +62,7 @@ static NSString * const kAFOAuth1CredentialServiceName = @"AFOAuth1CredentialSer
     BOOL canBeRenewed = NO;
     NSString *tokenRenewable = parameters[@"oauth_token_renewable"];
     if (tokenDuration) {
-        canBeRenewed = [AFOAuth1Utils isQueryStringValueTrue:tokenRenewable];
+        canBeRenewed = AFOAuth1IsQueryStringValueTrue(tokenRenewable);
     }
     
     self = [self initWithKey:key secret:secret session:session expiration:expiration renewable:canBeRenewed];

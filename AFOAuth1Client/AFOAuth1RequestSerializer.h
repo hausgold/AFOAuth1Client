@@ -63,4 +63,6 @@ typedef NS_ENUM(NSUInteger, AFOAuth1SignatureMethod) {
  */
 + (instancetype)serializerWithKey:(NSString *)key secret:(NSString *)secret;
 
+- (instancetype)initWithKey:(NSString *)key secret:(NSString *)secret NS_DESIGNATED_INITIALIZER;
+
 @end

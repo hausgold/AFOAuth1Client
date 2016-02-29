@@ -22,39 +22,31 @@
 
 #import <Foundation/Foundation.h>
 
-/**
- 
- */
-@interface AFOAuth1Utils : NSObject
+FOUNDATION_EXPORT NSString * AFOAuth1Nounce();
+
+FOUNDATION_EXPORT NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding);
 
 /**
+ Returns a percent-escaped string for a header string key or value.
+ RFC 3986 states that the following characters are "reserved" characters.
+ - General Delimiters: ":", "#", "[", "]", "@", "?", "/"
+ - Sub-Delimiters: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
  
+ - parameter string: The string to be percent-escaped.
+ - returns: The percent-escaped string.
  */
-+ (NSString *)percentEscapedQueryStringPairMemberFromString:(NSString *)string withEncoding:(NSStringEncoding)encoding;
+FOUNDATION_EXPORT NSString * AFOAuth1PercentEscapedStringFromString(NSString *string);
 
-/**
- 
- */
-+ (NSString *)sortedQueryString:(NSString *)queryString;
+FOUNDATION_EXPORT NSString * AFOAuth1QueryStringFromParameters(NSDictionary *parameters);
 
-/**
- 
- */
-+ (NSArray *)sortedQueryItemsFromQueryString:(NSString *)queryString;
+FOUNDATION_EXPORT NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding);
 
-/**
- 
- */
-+ (NSDictionary *)parametersFromQueryString:(NSString *)queryString;
+FOUNDATION_EXPORT NSDictionary * AFOAuth1ParametersFromQueryString(NSString *queryString);
 
-/**
- 
- */
-+ (NSArray *)sortedQueryItemsFromParameters:(NSDictionary *)parameters;
+FOUNDATION_EXPORT NSString * AFOAuth1SortedQueryString(NSString *queryString);
 
-/**
- 
- */
-+ (BOOL)isQueryStringValueTrue:(NSString *)value;
+FOUNDATION_EXPORT NSArray *AFOAuth1SortedQueryItemsFromQueryString(NSString *queryString);
 
-@end
+FOUNDATION_EXPORT NSArray * AFOAuth1SortedQueryItemsFromParameters(NSDictionary *parameters);
+
+FOUNDATION_EXPORT BOOL AFOAuth1IsQueryStringValueTrue(NSString *value);

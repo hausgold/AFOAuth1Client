@@ -22,21 +22,12 @@
 
 #import "AFOAuth1RequestSerializer.h"
 
-#import <CommonCrypto/CommonHMAC.h>
-
 #import "AFOAuth1Token.h"
 #import "AFOAuth1Utils.h"
 
 static NSString * const kAFOAuth1Version = @"1.0";
 
-static inline NSString * AFOAuth1Nounce() {
-    CFUUIDRef uuid = CFUUIDCreate(NULL);
-    CFStringRef string = CFUUIDCreateString(NULL, uuid);
-    CFRelease(uuid);
-    return (NSString *)CFBridgingRelease(string);
-}
-
-static inline NSString * NSStringFromAFOAuth1SignatureMethod(AFOAuth1SignatureMethod signatureMethod) {
+NSString * NSStringFromAFOAuth1SignatureMethod(AFOAuth1SignatureMethod signatureMethod) {
     switch (signatureMethod) {
         case AFOAuth1PlainTextSignatureMethod: {
             return @"PLAINTEXT";
@@ -51,31 +42,6 @@ static inline NSString * NSStringFromAFOAuth1SignatureMethod(AFOAuth1SignatureMe
     }
 }
 
-static inline NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding) {
-    NSString *secret = tokenSecret ? tokenSecret : @"";
-    NSString *signature = [NSString stringWithFormat:@"%@&%@", consumerSecret, secret];
-    return signature;
-}
-
-static inline NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding) {
-    NSString *secret = tokenSecret ? tokenSecret : @"";
-    NSString *secretString = [NSString stringWithFormat:@"%@&%@", [AFOAuth1Utils percentEscapedQueryStringPairMemberFromString:consumerSecret withEncoding:stringEncoding], [AFOAuth1Utils percentEscapedQueryStringPairMemberFromString:secret withEncoding:stringEncoding]];
-    NSData *secretStringData = [secretString dataUsingEncoding:stringEncoding];
-    
-    NSString *queryString = [AFOAuth1Utils percentEscapedQueryStringPairMemberFromString:[AFOAuth1Utils sortedQueryString:request.URL.query] withEncoding:stringEncoding];
-    NSString *urlWithoutQueryString = [AFOAuth1Utils percentEscapedQueryStringPairMemberFromString:[request.URL.absoluteString componentsSeparatedByString:@"?"][0] withEncoding:stringEncoding];
-    NSString *requestString = [NSString stringWithFormat:@"%@&%@&%@", request.HTTPMethod, urlWithoutQueryString, queryString];
-    NSData *requestStringData = [requestString dataUsingEncoding:stringEncoding];
-    
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    CCHmacContext cx;
-    CCHmacInit(&cx, kCCHmacAlgSHA1, secretStringData.bytes, secretStringData.length);
-    CCHmacUpdate(&cx, requestStringData.bytes, requestStringData.length);
-    CCHmacFinal(&cx, digest);
-    
-    return [[NSData dataWithBytes:digest length:CC_SHA1_DIGEST_LENGTH] base64EncodedStringWithOptions:0];
-}
-
 @interface AFOAuth1RequestSerializer ()
 
 @property (nonatomic, copy) NSString *key;
@@ -85,16 +51,25 @@ static inline NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSStri
 
 @implementation AFOAuth1RequestSerializer
 
-+ (instancetype)serializerWithKey:(NSString *)key secret:(NSString *)secret {
++ (instancetype)serializerWithKey:(NSString *)key secret:(NSString *)secret {    
+    return[[self alloc] initWithKey:key secret:secret];
+}
+
+- (instancetype)init {
+    return [self initWithKey:nil secret:nil];
+}
+
+- (instancetype)initWithKey:(NSString *)key secret:(NSString *)secret {
     NSParameterAssert(key);
     NSParameterAssert(secret);
     
-    AFOAuth1RequestSerializer *serializer = [self serializer];
-    serializer.key = key;
-    serializer.secret = secret;
-    serializer.signatureMethod = AFOAuth1HMACSHA1SignatureMethod;
-    
-    return serializer;
+    self = [super init];
+    if (self) {
+        _key = key;
+        _secret = secret;
+        _signatureMethod = AFOAuth1HMACSHA1SignatureMethod;
+    }
+    return self;
 }
 
 - (NSDictionary *)oauthParameters {
@@ -111,10 +86,18 @@ static inline NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSStri
 }
 
 - (NSString *)oauthSignatureForMethod:(NSString *)method URLString:(NSString *)URLString parameters:(NSDictionary *)parameters token:(AFOAuth1Token *)token error:(NSError * __autoreleasing *)error {
+
+    self.queryStringSerializationWithBlock = ^NSString * _Nonnull(NSURLRequest * _Nonnull request, id  _Nonnull parameters, NSError * _Nullable __autoreleasing * _Nullable error) {
+        return AFOAuth1QueryStringFromParameters(parameters);
+    };
+    
     NSMutableURLRequest *request = [super requestWithMethod:@"GET" URLString:URLString parameters:parameters error:error];
+    self.queryStringSerializationWithBlock = nil;
+    
     if (!request) {
         return nil;
     }
+    
     [request setHTTPMethod:method];
     
     NSString *tokenSecret = token ? token.secret : nil;
@@ -157,12 +140,12 @@ static inline NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSStri
     }
     mutableAuthorizationParameters[@"oauth_signature"] = oauthSignature;
     
-    NSArray *sortedQueryItems = [AFOAuth1Utils sortedQueryItemsFromParameters:mutableAuthorizationParameters];
+    NSArray *sortedQueryItems = AFOAuth1SortedQueryItemsFromParameters(mutableAuthorizationParameters);
     NSMutableArray *mutableComponents = [NSMutableArray array];
     for (NSArray *queryItem in sortedQueryItems) {
         if (queryItem.count == 2) {
-            NSString *key = [AFOAuth1Utils percentEscapedQueryStringPairMemberFromString:queryItem[0] withEncoding:self.stringEncoding];
-            NSString *value = [AFOAuth1Utils percentEscapedQueryStringPairMemberFromString:queryItem[1] withEncoding:self.stringEncoding];
+            NSString *key = AFOAuth1PercentEscapedStringFromString(queryItem[0]);
+            NSString *value = AFOAuth1PercentEscapedStringFromString(queryItem[1]);
             NSString *component = [NSString stringWithFormat:@"%@=\"%@\"", key, value];
             [mutableComponents addObject:component];
         }
@@ -206,13 +189,12 @@ static inline NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSStri
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)decoder {
-    self = [super init];
+    NSString *key = [decoder decodeObjectForKey:NSStringFromSelector(@selector(key))];
+    NSString *secret = [decoder decodeObjectForKey:NSStringFromSelector(@selector(secret))];
+    self = [self initWithKey:key secret:secret];
     if (!self) {
         return nil;
     }
-    
-    _key = [decoder decodeObjectForKey:NSStringFromSelector(@selector(key))];
-    _secret = [decoder decodeObjectForKey:NSStringFromSelector(@selector(secret))];
     _signatureMethod = [[decoder decodeObjectForKey:NSStringFromSelector(@selector(signatureMethod))] unsignedIntegerValue];
     _realm = [decoder decodeObjectForKey:NSStringFromSelector(@selector(realm))];
     _accessToken = [decoder decodeObjectForKey:NSStringFromSelector(@selector(accessToken))];
