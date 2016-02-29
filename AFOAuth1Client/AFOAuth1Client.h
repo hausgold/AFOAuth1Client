@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import <AFNetworking/AFHTTPSessionManager.h>
+#import <AFOAuth1Client/AFOAuth1RequestSerializer.h>
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <UIKit/UIKit.h>
@@ -61,6 +62,20 @@ FOUNDATION_EXPORT NSString * const kAFApplicationLaunchOptionsURLKey;
  @see RFC 5849 The OAuth 1.0 Protocol: https://tools.ietf.org/html/rfc5849
  */
 @interface AFOAuth1Client : AFHTTPSessionManager <NSCoding, NSCopying>
+
+/**
+ Requests created with `requestWithMethod:URLString:parameters:` & `multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:` are constructed with a set of default headers using a parameter serialization specified by this property. By default, this is set to an instance of `AFOAuth1RequestSerializer`, which serializes authorized query string parameters for `GET`, `HEAD`, and `DELETE` requests, or otherwise URL-form-encodes HTTP message bodies.
+ 
+ @warning `requestSerializer` must not be `nil`.
+ */
+@property (nonatomic, strong) AFOAuth1RequestSerializer * requestSerializer;
+
+/**
+ Responses sent from the server in data tasks created with `dataTaskWithRequest:success:failure:` and run using the `GET` / `POST` / et al. convenience methods are automatically validated and serialized by the response serializer. By default, this property is set to an instance of `AFHTTPResponseSerializer`.
+ 
+ @warning `responseSerializer` must not be `nil`.
+ */
+@property (nonatomic, strong) id <AFURLResponseSerialization> responseSerializer;
 
 ///---------------------
 /// @name Initialization

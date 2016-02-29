@@ -10,7 +10,7 @@
 		D0D754691C834E4400744D93 /* AFOAuth1Client.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE87A1C8329490077D540 /* AFOAuth1Client.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D7546A1C834E4900744D93 /* AFOAuth1Token.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8851C832A3B0077D540 /* AFOAuth1Token.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D7546B1C834F0100744D93 /* AFOAuth1Client-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8DE1C8337E50077D540 /* AFOAuth1Client-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D7546C1C834F2E00744D93 /* AFOAuth1RequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8831C832A3B0077D540 /* AFOAuth1RequestSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D0D7546C1C834F2E00744D93 /* AFOAuth1RequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8831C832A3B0077D540 /* AFOAuth1RequestSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D7546D1C834F3000744D93 /* AFOAuth1Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8871C832A3B0077D540 /* AFOAuth1Utils.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D0D7546E1C834FE300744D93 /* AFOAuth1Client.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8821C832A3B0077D540 /* AFOAuth1Client.m */; };
 		D0D7546F1C834FE600744D93 /* AFOAuth1RequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8841C832A3B0077D540 /* AFOAuth1RequestSerializer.m */; };
@@ -18,7 +18,7 @@
 		D0D754711C834FEC00744D93 /* AFOAuth1Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8881C832A3B0077D540 /* AFOAuth1Utils.m */; };
 		D0FAE87B1C8329490077D540 /* AFOAuth1Client.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE87A1C8329490077D540 /* AFOAuth1Client.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0FAE8891C832A3B0077D540 /* AFOAuth1Client.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8821C832A3B0077D540 /* AFOAuth1Client.m */; };
-		D0FAE88A1C832A3B0077D540 /* AFOAuth1RequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8831C832A3B0077D540 /* AFOAuth1RequestSerializer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D0FAE88A1C832A3B0077D540 /* AFOAuth1RequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8831C832A3B0077D540 /* AFOAuth1RequestSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0FAE88B1C832A3B0077D540 /* AFOAuth1RequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8841C832A3B0077D540 /* AFOAuth1RequestSerializer.m */; };
 		D0FAE88C1C832A3B0077D540 /* AFOAuth1Token.h in Headers */ = {isa = PBXBuildFile; fileRef = D0FAE8851C832A3B0077D540 /* AFOAuth1Token.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0FAE88D1C832A3B0077D540 /* AFOAuth1Token.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAE8861C832A3B0077D540 /* AFOAuth1Token.m */; };
@@ -125,8 +125,8 @@
 			files = (
 				D0D754691C834E4400744D93 /* AFOAuth1Client.h in Headers */,
 				D0D7546B1C834F0100744D93 /* AFOAuth1Client-umbrella.h in Headers */,
-				D0D7546A1C834E4900744D93 /* AFOAuth1Token.h in Headers */,
 				D0D7546C1C834F2E00744D93 /* AFOAuth1RequestSerializer.h in Headers */,
+				D0D7546A1C834E4900744D93 /* AFOAuth1Token.h in Headers */,
 				D0D7546D1C834F3000744D93 /* AFOAuth1Utils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

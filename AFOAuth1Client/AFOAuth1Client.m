@@ -44,6 +44,9 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
 
 @implementation AFOAuth1Client
 
+@dynamic requestSerializer;
+@dynamic responseSerializer;
+
 #pragma mark - Properties
 
 + (BOOL)automaticallyNotifiesObserversOfApplicationLaunchNotificationObserver {
@@ -74,7 +77,7 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
     }
     
     self.requestSerializer = [AFOAuth1RequestSerializer serializerWithKey:key secret:secret];
-    self.responseSerializer = [AFHTTPResponseSerializer serializer]; // FIXME: (me@lxcid.com) Review to see whether we should introduce our own response serializer?
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     return self;
 }
@@ -171,28 +174,20 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
                                                           scope:(NSString *)scope
                                                         success:(void (^)(AFOAuth1Token *requestToken, id responseObject))success
                                                         failure:(void (^)(NSError *error))failure {
-    if (![self.requestSerializer isKindOfClass:[AFOAuth1RequestSerializer class]]) {
-        if (failure) {
-            NSError *error = nil; // FIXME: (me@lxcid.com) Provides error info.
-            failure(error);
-        }
-        return nil;
-    }
-    AFOAuth1RequestSerializer *oauth1RequestSerializer = (AFOAuth1RequestSerializer *)self.requestSerializer;
     
-    NSMutableDictionary *mutableParameters = [oauth1RequestSerializer.oauthParameters mutableCopy];
+    NSMutableDictionary *mutableParameters = [self.requestSerializer.oauthParameters mutableCopy];
     if (callbackURL) {
         mutableParameters[@"oauth_callback"] = [callbackURL absoluteString];
     } else {
         mutableParameters[@"oauth_callback"] = @"oob";
     }
-    if (scope && scope.length > 0 && !oauth1RequestSerializer.accessToken) {
+    if (scope && scope.length > 0 && !self.requestSerializer.accessToken) {
         mutableParameters[@"scope"] = scope;
     }
     
     NSDictionary *parameters = [mutableParameters copy];
     NSError *error = nil;
-    NSMutableURLRequest *request = [oauth1RequestSerializer requestWithMethod:accessMethod URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&error];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:accessMethod URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&error];
     if (error) {
         if (failure) {
             failure(error);
@@ -231,15 +226,7 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
                                                   accessMethod:(NSString *)accessMethod
                                                        success:(void (^)(AFOAuth1Token *accessToken, id responseObject))success
                                                        failure:(void (^)(NSError *error))failure {
-    if (![self.requestSerializer isKindOfClass:[AFOAuth1RequestSerializer class]]) {
-        if (failure) {
-            NSError *error = nil; // FIXME: (me@lxcid.com) Provides error info.
-            failure(error);
-        }
-        return nil;
-    }
     
-    AFOAuth1RequestSerializer *oauth1RequestSerializer = (AFOAuth1RequestSerializer *)self.requestSerializer;
     if (!requestToken.key) {
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:NSLocalizedStringFromTable(@"Bad OAuth response received from the server.", @"AFNetworking", nil) forKey:NSLocalizedFailureReasonErrorKey];
         NSError *error = [[NSError alloc] initWithDomain:AFURLResponseSerializationErrorDomain code:NSURLErrorBadServerResponse userInfo:userInfo];
@@ -249,9 +236,9 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
         return nil;
     }
     
-    oauth1RequestSerializer.accessToken = requestToken;
+    self.requestSerializer.accessToken = requestToken;
     
-    NSMutableDictionary *mutableParameters = [oauth1RequestSerializer.oauthParameters mutableCopy];
+    NSMutableDictionary *mutableParameters = [self.requestSerializer.oauthParameters mutableCopy];
     mutableParameters[@"oauth_token"] = requestToken.key;
     if (requestToken.verifier) {
         mutableParameters[@"oauth_verifier"] = requestToken.verifier;
@@ -259,7 +246,7 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
     
     NSDictionary *parameters = [mutableParameters copy];
     NSError *error = nil;
-    NSMutableURLRequest *request = [oauth1RequestSerializer requestWithMethod:accessMethod URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&error];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:accessMethod URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&error];
     if (error) {
         if (failure) {
             failure(error);
