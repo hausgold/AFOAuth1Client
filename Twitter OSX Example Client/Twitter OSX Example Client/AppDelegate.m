@@ -54,7 +54,7 @@
 {
     NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
     NSDictionary *info = [NSDictionary dictionaryWithObject:url forKey:kAFApplicationLaunchOptionsURLKey];
-    NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification object:self userInfo:info];
+    NSNotification *notification = [NSNotification notificationWithName:kAFOAuth1ApplicationLaunchedWithURLNotification object:self userInfo:info];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 

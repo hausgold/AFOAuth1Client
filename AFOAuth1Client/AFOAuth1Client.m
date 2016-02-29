@@ -27,7 +27,7 @@
 #import "AFOAuth1Utils.h"
 #import <AFNetworking/AFURLResponseSerialization.h>
 
-NSString * const kAFApplicationLaunchedWithURLNotification = @"kAFApplicationLaunchedWithURLNotification";
+NSString * const kAFOAuth1ApplicationLaunchedWithURLNotification = @"kAFOAuth1ApplicationLaunchedWithURLNotification";
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 NSString * const kAFApplicationLaunchOptionsURLKey = @"UIApplicationLaunchOptionsURLKey";
 #else
@@ -97,7 +97,7 @@ NSString * const kAFApplicationLaunchOptionsURLKey = @"NSApplicationLaunchOption
         __block AFOAuth1Token *currentRequestToken = requestToken;
         
         NSNotificationCenter *defaultNotificationCenter = [NSNotificationCenter defaultCenter];
-        self.applicationLaunchNotificationObserver = [defaultNotificationCenter addObserverForName:kAFApplicationLaunchedWithURLNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
+        self.applicationLaunchNotificationObserver = [defaultNotificationCenter addObserverForName:kAFOAuth1ApplicationLaunchedWithURLNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
             NSURL *URL = [notification.userInfo valueForKey:kAFApplicationLaunchOptionsURLKey];
             
             currentRequestToken.verifier = [AFOAuth1ParametersFromQueryString(URL.query) valueForKey:@"oauth_verifier"];

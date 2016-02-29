@@ -46,14 +46,14 @@ typedef void (^AFServiceProviderRequestCompletionBlock)();
 ///----------------
 
 /**
- 
+ The name for the OAuth callback notification.
  */
-extern NSString * const kAFApplicationLaunchedWithURLNotification;
+FOUNDATION_EXPORT NSString * const kAFOAuth1ApplicationLaunchedWithURLNotification;
 
 /**
- 
+ The OAuth callback URL key.
  */
-extern NSString * const kAFApplicationLaunchOptionsURLKey;
+FOUNDATION_EXPORT NSString * const kAFApplicationLaunchOptionsURLKey;
 
 /**
  `AFOAuth1Client` encapsulates common patterns to authenticate against a resource server conforming to the behavior outlined in the OAuth 1.0a specification.
