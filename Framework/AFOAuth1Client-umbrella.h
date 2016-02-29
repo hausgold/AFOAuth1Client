@@ -15,6 +15,5 @@ FOUNDATION_EXPORT double AFOAuth1ClientVersionNumber;
 FOUNDATION_EXPORT const unsigned char AFOAuth1ClientVersionString[];
 
 #import <AFOAuth1Client/AFOAuth1Client.h>
-#import <AFOAuth1Client/AFOAuth1Token.h>
 
 

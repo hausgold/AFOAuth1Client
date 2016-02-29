@@ -20,8 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <AFNetworking/AFHTTPSessionManager.h>
-#import <AFOAuth1Client/AFOAuth1RequestSerializer.h>
+#import <Foundation/Foundation.h>
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <UIKit/UIKit.h>
@@ -29,13 +28,10 @@
 #import <Appkit/AppKit.h>
 #endif
 
+#import <AFNetworking/AFHTTPSessionManager.h>
+#import <AFOAuth1Client/AFOAuth1RequestSerializer.h>
+
 NS_ASSUME_NONNULL_BEGIN
-
-///---------------------------
-/// @name Forward Declarations
-///---------------------------
-
-@class AFOAuth1Token;
 
 ///-----------------------
 /// @name Type Definitions

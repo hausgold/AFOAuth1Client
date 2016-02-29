@@ -21,8 +21,6 @@
 // THE SOFTWARE.
 
 #import "AFOAuth1RequestSerializer.h"
-
-#import "AFOAuth1Token.h"
 #import "AFOAuth1Utils.h"
 
 static NSString * const kAFOAuth1Version = @"1.0";

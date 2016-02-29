@@ -21,11 +21,7 @@
 // THE SOFTWARE.
 
 #import "AFOAuth1Client.h"
-
-#import "AFOAuth1RequestSerializer.h"
-#import "AFOAuth1Token.h"
 #import "AFOAuth1Utils.h"
-#import <AFNetworking/AFURLResponseSerialization.h>
 
 NSString * const kAFOAuth1ApplicationLaunchedWithURLNotification = @"kAFOAuth1ApplicationLaunchedWithURLNotification";
 #if __IPHONE_OS_VERSION_MIN_REQUIRED

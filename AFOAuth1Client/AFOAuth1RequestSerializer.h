@@ -21,10 +21,9 @@
 // THE SOFTWARE.
 
 #import <AFNetworking/AFURLRequestSerialization.h>
+#import <AFOAuth1Client/AFOAuth1Token.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class AFOAuth1Token;
 
 /**
  Signature method enumeration/

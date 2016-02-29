@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFOAuth1Utils.h"
 #import <CommonCrypto/CommonHMAC.h>
+#import "AFOAuth1Utils.h"
 
 NSString * AFOAuth1Nounce() {
     CFUUIDRef uuid = CFUUIDCreate(NULL);

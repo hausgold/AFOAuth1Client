@@ -20,10 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFOAuth1Token.h"
-
 #import <Security/Security.h>
-
+#import "AFOAuth1Token.h"
 #import "AFOAuth1Utils.h"
 
 static NSString * const kAFOAuth1CredentialServiceName = @"AFOAuth1CredentialService";
