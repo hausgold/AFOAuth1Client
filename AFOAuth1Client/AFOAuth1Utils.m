@@ -93,7 +93,7 @@ NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerS
 
 NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding) {
     NSString *secret = tokenSecret ? tokenSecret : @"";
-    NSString *secretString = [NSString stringWithFormat:@"%@&%@", AFOAuth1PercentEscapedStringFromString(consumerSecret), AFOAuth1PercentEscapedStringFromString(secret)];
+    NSString *secretString = [NSString stringWithFormat:@"%@&%@", consumerSecret ?: @"", secret ?: @""];
     NSData *secretStringData = [secretString dataUsingEncoding:stringEncoding];
     
     NSString *queryString = AFOAuth1PercentEscapedStringFromString(AFOAuth1SortedQueryString(request.URL.query));
