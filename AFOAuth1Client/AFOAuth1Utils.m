@@ -130,12 +130,12 @@ NSDictionary * AFOAuth1ParametersFromQueryString(NSString *queryString) {
     for (NSArray *queryItem in sortedQueryItems) {
         switch (queryItem.count) {
             case 1: {
-                NSString *key = queryItem[0];
+                NSString *key = [queryItem[0] stringByRemovingPercentEncoding];
                 parameters[key] = [NSNull null];
             } break;
             case 2: {
-                NSString *key = queryItem[0];
-                NSString *value = queryItem[1];
+                NSString *key = [queryItem[0] stringByRemovingPercentEncoding];
+                NSString *value = [queryItem[1] stringByRemovingPercentEncoding];
                 parameters[key] = value;
             } break;
             default: {
