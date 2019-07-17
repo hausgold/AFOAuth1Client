@@ -93,7 +93,7 @@ NSString * AFOAuth1PlainTextSignature(NSURLRequest *request, NSString *consumerS
 
 NSString * AFOAuth1HMACSHA1Signature(NSURLRequest *request, NSString *consumerSecret, NSString *tokenSecret, NSStringEncoding stringEncoding) {
     NSString *secret = tokenSecret ? tokenSecret : @"";
-    NSString *secretString = [NSString stringWithFormat:@"%@&%@", consumerSecret ?: @"", secret ?: @""];
+    NSString *secretString = [NSString stringWithFormat:@"%@&%@", AFOAuth1PercentEscapedStringFromString(consumerSecret), AFOAuth1PercentEscapedStringFromString(secret)];
     NSData *secretStringData = [secretString dataUsingEncoding:stringEncoding];
     
     NSString *queryString = AFOAuth1PercentEscapedStringFromString(AFOAuth1SortedQueryString(request.URL.query));
@@ -130,12 +130,12 @@ NSDictionary * AFOAuth1ParametersFromQueryString(NSString *queryString) {
     for (NSArray *queryItem in sortedQueryItems) {
         switch (queryItem.count) {
             case 1: {
-                NSString *key = queryItem[0];
+                NSString *key = [queryItem[0] stringByRemovingPercentEncoding];
                 parameters[key] = [NSNull null];
             } break;
             case 2: {
-                NSString *key = queryItem[0];
-                NSString *value = queryItem[1];
+                NSString *key = [queryItem[0] stringByRemovingPercentEncoding];
+                NSString *value = [queryItem[1] stringByRemovingPercentEncoding];
                 parameters[key] = value;
             } break;
             default: {
